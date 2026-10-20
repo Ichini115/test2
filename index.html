@@ -191,7 +191,7 @@
         </footer>
     </main>
 
-    <script>
+     <script>
         // =========================================================================
         // 🛠️ CONFIGURATION DATA
         // =========================================================================
@@ -199,32 +199,48 @@
             names: "Aurellia & Mateusz",
             startDate: "2025-10-23T10:00",
             audioUrl: "https://mpmania.com/wp-content/uploads/2021/03/Justin-Bieber-Lifetime.mp3",
-            letter: "My Dearest Aurellia,\n\nThank you for every smile, every hug, and all the beautiful memories we've created together. You are my best friend and the love of my life.\n\nWith you, every day is an amazing adventure. Here's to us, our story, and all the wonderful years ahead of us!\n\nI love you endlessly! ❤️\n\n- Mateusz"
+            letter: "My Dearest Aurellia,\n\nIt's already been a year together. During this time, we've laughed together, shared sad moments, and talked so much about our future. Even though a long-distance relationship is a first for both of us and it's definitely not easy, I would never trade what we have for anything else in the world.\n\nYou are my everything. Thank you for every smile, every hug, and for making every single day better just by being in it. Your smile can light up even my darkest days. You are my best friend, the love of my life, and I am 100% sure that you are the one for me.\n\nHere’s to us, to our story, and to all the wonderful years ahead of us!\n\nI love you endlessly! ❤️\n\n- Mateusz"
         };
 
-        // Our milestones (Photos, dates and descriptions)
+        // You can add 1, 2, 3, or 4 images per milestone using an array: images: ["url1", "url2", ...]
         const timelineData = [
             {
                 date: "October 23, 2025",
                 title: "Where It All Began ❤️",
-                desc: "The unforgettable day our story officially started.",
-                img: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=600&q=80"
+                desc: "The unforgettable day our story officially started.\n\nIt might not have started like a movie, but to me, our story is still beautiful and amazing. 🥰",
+                images: [
+                    "https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=600&q=80"
+                ]
             },
             {
-                date: "Special Moment",
+                date: "🌹 Our First Meet 🌹",
                 title: "Our Unforgettable Memories 🏖️",
-                desc: "Moments filled with sunshine, smiles, and endless happiness.",
-                img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
+                desc: "Moments filled with sunshine, smiles, and endless happiness.\n\nI think buying tickets and coming to you was best decision i made in my life sayang ❤️",
+                images: [
+                    "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1476514525535-ce74f45814d2?auto=format&fit=crop&w=600&q=80"
+                ]
             },
             {
+                date: "Our Time together",
+                title: "Best time in my life 🥰",
+                desc: "Even if it wasn't long, it still was best time in my life and you are the reason for that.",
+                images: [
+                    "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80"
+                ]
+            },
+             {
                 date: "Today & Forever",
                 title: "Happy Anniversary! 🎉",
                 desc: "Celebrating our love today and looking forward to every tomorrow.",
-                img: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80"
+                images: [
+                    "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80"
+                ]
             }
         ];
         // =========================================================================
-
         let noAttempts = 0;
         let yesPaddingX = 32;
         let yesPaddingY = 14;
