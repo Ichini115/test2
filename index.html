@@ -9,7 +9,7 @@
     <!-- Canvas Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -30,7 +30,7 @@
                         }
                     },
                     fontFamily: {
-                        handwriting: ['"Dancing Script"', 'cursive'],
+                        handwriting: ['"Caveat"', 'cursive'],
                         serif: ['"Playfair Display"', 'serif'],
                         sans: ['"Plus Jakarta Sans"', 'sans-serif'],
                     }
@@ -87,7 +87,7 @@
                 I have a very important question for you... Choose wisely! 😉
             </p>
 
-            <div id="buttonArea" class="relative w-full min-h-[220px] flex items-center justify-center gap-6 overflow-hidden">
+            <div id="buttonArea" class="relative w-full min-h-[220px] flex items-center justify-center gap-6 overflow-hidden p-4">
                 <button id="yesBtn" onclick="handleYesClick()" 
                     class="bg-gradient-to-r from-romantic-500 to-pink-500 hover:from-romantic-600 hover:to-pink-600 text-white font-bold rounded-full shadow-lg hover:shadow-pink-300/50 transition-all duration-200 transform hover:scale-105 active:scale-95 flex items-center justify-center gap-2 z-10"
                     style="padding: 14px 32px; font-size: 1.125rem;">
@@ -95,7 +95,7 @@
                 </button>
 
                 <button id="noBtn" 
-                    class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold rounded-full shadow transition-all duration-150 z-20"
+                    class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold rounded-full shadow transition-all duration-200 z-30"
                     style="padding: 12px 28px; font-size: 1rem;">
                     No 😜
                 </button>
@@ -181,7 +181,7 @@
             <h2 class="text-2xl md:text-3xl font-bold text-slate-800 mb-6 flex items-center gap-3">
                 <i class="fa-solid fa-envelope-open-text text-romantic-500"></i> My Letter To You
             </h2>
-            <div id="letterDisplay" class="font-serif italic text-lg md:text-xl text-slate-700 leading-relaxed space-y-4 whitespace-pre-line bg-white/80 p-6 md:p-8 rounded-2xl border border-rose-100 shadow-inner">
+            <div id="letterDisplay" class="font-handwriting text-2xl md:text-3xl text-slate-800 leading-relaxed space-y-4 whitespace-pre-line bg-white/80 p-6 md:p-8 rounded-2xl border border-rose-100 shadow-inner">
             </div>
         </section>
 
@@ -191,7 +191,17 @@
         </footer>
     </main>
 
-     <script>
+    <!-- Photo Lightbox Modal for Full View & Zoom -->
+    <div id="imageModal" class="fixed inset-0 z-50 bg-black/90 hidden backdrop-blur-md flex items-center justify-center p-4 transition-opacity duration-300" onclick="closeImageModal()">
+        <button onclick="closeImageModal()" class="absolute top-4 right-4 text-white text-3xl font-bold p-2 hover:text-rose-300 transition focus:outline-none z-50">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="relative max-w-5xl max-h-[90vh] flex items-center justify-center" onclick="event.stopPropagation()">
+            <img id="modalImg" src="" alt="Full view" class="max-w-full max-h-[85vh] object-contain rounded-xl shadow-2xl transition-transform duration-200">
+        </div>
+    </div>
+
+    <script>
         // =========================================================================
         // 🛠️ CONFIGURATION DATA
         // =========================================================================
@@ -202,7 +212,6 @@
             letter: "My Dearest Aurellia,\n\nIt's already been a year together. During this time, we've laughed together, shared sad moments, and talked so much about our future. Even though a long-distance relationship is a first for both of us and it's definitely not easy, I would never trade what we have for anything else in the world.\n\nYou are my everything. Thank you for every smile, every hug, and for making every single day better just by being in it. Your smile can light up even my darkest days. You are my best friend, the love of my life, and I am 100% sure that you are the one for me.\n\nHere’s to us, to our story, and to all the wonderful years ahead of us!\n\nI love you endlessly! ❤️\n\n- Mateusz"
         };
 
-        // You can add 1, 2, 3, or 4 images per milestone using an array: images: ["url1", "url2", ...]
         const timelineData = [
             {
                 date: "October 23, 2025",
@@ -231,7 +240,7 @@
                     "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80"
                 ]
             },
-             {
+            {
                 date: "Today & Forever",
                 title: "Happy Anniversary! 🎉",
                 desc: "Celebrating our love today and looking forward to every tomorrow.",
@@ -241,6 +250,7 @@
             }
         ];
         // =========================================================================
+
         let noAttempts = 0;
         let yesPaddingX = 32;
         let yesPaddingY = 14;
@@ -301,27 +311,48 @@
             const moveNoButton = () => {
                 noAttempts++;
 
-                // Make YES button grow bigger
-                yesPaddingX += 6;
-                yesPaddingY += 3;
+                yesPaddingX += 8;
+                yesPaddingY += 4;
                 yesFontSize += 0.15;
                 yesBtn.style.padding = `${yesPaddingY}px ${yesPaddingX}px`;
                 yesBtn.style.fontSize = `${yesFontSize}rem`;
 
                 noBtn.style.position = 'absolute';
-                noBtn.style.zIndex = '30';
 
                 const areaRect = buttonArea.getBoundingClientRect();
                 const yesRect = yesBtn.getBoundingClientRect();
 
-                const maxOffsetX = (areaRect.width / 2) - 60;
-                const maxOffsetY = (areaRect.height / 2) - 30;
+                const safeMargin = 70;
+                let randomX, randomY;
+                let overlap = true;
+                let attempts = 0;
 
-                let randomX = (Math.random() - 0.5) * (maxOffsetX * 2);
-                let randomY = (Math.random() - 0.5) * (maxOffsetY * 2);
+                while (overlap && attempts < 20) {
+                    attempts++;
+                    randomX = (Math.random() - 0.5) * (areaRect.width - 120);
+                    randomY = (Math.random() - 0.5) * (areaRect.height - 80);
 
-                if (Math.abs(randomX) < (yesRect.width / 2) + 20) {
-                    randomX = randomX >= 0 ? randomX + (yesRect.width / 2) : randomX - (yesRect.width / 2);
+                    const noLeft = (areaRect.width / 2) + randomX - 40;
+                    const noTop = (areaRect.height / 2) + randomY - 20;
+
+                    const yesLeft = yesRect.left - areaRect.left;
+                    const yesRight = yesRect.right - areaRect.left;
+                    const yesTop = yesRect.top - areaRect.top;
+                    const yesBottom = yesRect.bottom - areaRect.top;
+
+                    if (
+                        noLeft + 80 < yesLeft - 10 || 
+                        noLeft > yesRight + 10 || 
+                        noTop + 40 < yesTop - 10 || 
+                        noTop > yesBottom + 10
+                    ) {
+                        overlap = false;
+                    }
+                }
+
+                if (overlap) {
+                    randomX = (Math.random() > 0.5 ? 1 : -1) * (yesRect.width / 2 + safeMargin);
+                    randomY = (Math.random() - 0.5) * 80;
                 }
 
                 noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
@@ -422,26 +453,78 @@
             }, 600);
         }
 
+        function renderPhotoGrid(images, title) {
+            if (!images || images.length === 0) return '';
+            
+            const validImages = images.filter(src => src && src.trim() !== '');
+            const count = validImages.length;
+            if (count === 0) return '';
+
+            let gridClass = 'grid-cols-1';
+
+            if (count === 2) {
+                gridClass = 'grid-cols-1 sm:grid-cols-2';
+            } else if (count === 3) {
+                gridClass = 'grid-cols-1 sm:grid-cols-3';
+            } else if (count >= 4) {
+                gridClass = 'grid-cols-1 sm:grid-cols-2';
+            }
+
+            const imgElements = validImages.map(src => `
+                <div class="overflow-hidden rounded-xl bg-rose-50/50 p-1 shadow-sm border border-rose-100/60 flex items-center justify-center cursor-pointer group relative" onclick="openImageModal('${src.trim()}')">
+                    <img src="${src.trim()}" alt="${title}" loading="lazy" class="w-full h-auto max-h-[600px] object-contain rounded-lg transform group-hover:scale-[1.02] transition duration-300" onerror="this.onerror=null; this.src='https://placehold.co/600x400/fda4af/ffffff?text=Our+Photo'">
+                    <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center text-white text-sm font-semibold gap-2">
+                        <i class="fa-solid fa-magnifying-glass-plus"></i> Powiększ
+                    </div>
+                </div>
+            `).join('');
+
+            return `
+                <div class="grid ${gridClass} gap-3 mt-4">
+                    ${imgElements}
+                </div>
+            `;
+        }
+
+        function openImageModal(src) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImg');
+            if (modal && modalImg) {
+                modalImg.src = src;
+                modal.classList.remove('hidden');
+            }
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('imageModal');
+            if (modal) {
+                modal.classList.add('hidden');
+            }
+        }
+
         function initTimeline() {
             const container = document.getElementById('timelineContainer');
             if (!container) return;
 
-            container.innerHTML = timelineData.map((item) => `
-                <div class="relative pl-6 md:pl-8 group">
-                    <div class="absolute -left-[17px] top-1 w-8 h-8 bg-white border-2 border-romantic-400 text-romantic-500 rounded-full flex items-center justify-center text-xs shadow-sm group-hover:scale-110 transition">
-                        ❤️
-                    </div>
-                    
-                    <div class="bg-white/80 p-5 md:p-6 rounded-2xl border border-rose-100 shadow-sm hover:shadow-md transition">
-                        <span class="text-xs font-bold text-romantic-500 uppercase tracking-wider block mb-1">${item.date}</span>
-                        <h3 class="text-lg font-bold text-slate-800 mb-2">${item.title}</h3>
-                        <p class="text-sm text-slate-600 mb-4">${item.desc}</p>
-                        <div class="overflow-hidden rounded-xl h-48 md:h-56 bg-rose-50">
-                            <img src="${item.img}" alt="${item.title}" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x400/fda4af/ffffff?text=Our+Photo'">
+            container.innerHTML = timelineData.map((item) => {
+                const imagesArray = item.images || (item.img ? [item.img] : []);
+                const photosGridHtml = renderPhotoGrid(imagesArray, item.title);
+
+                return `
+                    <div class="relative pl-6 md:pl-8 group">
+                        <div class="absolute -left-[17px] top-1 w-8 h-8 bg-white border-2 border-romantic-400 text-romantic-500 rounded-full flex items-center justify-center text-xs shadow-sm group-hover:scale-110 transition">
+                            ❤️
+                        </div>
+                        
+                        <div class="bg-white/80 p-5 md:p-6 rounded-2xl border border-rose-100 shadow-sm hover:shadow-md transition">
+                            <span class="text-xs font-bold text-romantic-500 uppercase tracking-wider block mb-1">${item.date}</span>
+                            <h3 class="text-lg font-bold text-slate-800 mb-1">${item.title}</h3>
+                            <p class="text-sm text-slate-600 mb-2 whitespace-pre-line">${item.desc}</p>
+                            ${photosGridHtml}
                         </div>
                     </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
         }
 
         document.addEventListener('DOMContentLoaded', () => {
