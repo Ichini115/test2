@@ -472,7 +472,7 @@
 
             const imgElements = validImages.map(src => `
                 <div class="overflow-hidden rounded-xl bg-rose-50/50 p-1 shadow-sm border border-rose-100/60 flex items-center justify-center cursor-pointer group relative" onclick="openImageModal('${src.trim()}')">
-                    <img src="${src.trim()}" alt="${title}" loading="lazy" class="w-full h-auto max-h-[600px] object-contain rounded-lg transform group-hover:scale-[1.02] transition duration-300" onerror="this.onerror=null; this.src='https://placehold.co/600x400/fda4af/ffffff?text=Our+Photo'">
+                    <img src="${src.trim()}" alt="${title}" loading="lazy" class="w-full h-auto max-h-[400px] object-contain rounded-lg transform group-hover:scale-[1.02] transition duration-300" onerror="this.onerror=null; this.src='https://placehold.co/600x400/fda4af/ffffff?text=Our+Photo'">
                     <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center text-white text-sm font-semibold gap-2">
                         <i class="fa-solid fa-magnifying-glass-plus"></i> Powiększ
                     </div>
