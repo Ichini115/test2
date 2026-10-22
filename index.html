@@ -210,6 +210,21 @@
             <p>Made with love for our anniversary ❤️</p>
         </footer>
     </main>
+    <div id="envelopeModal" class="fixed inset-0 z-50 bg-black/60 hidden backdrop-blur-sm flex items-center justify-center p-4 transition-opacity duration-300" onclick="closeEnvelopeModal()">
+        <div class="glass-card max-w-md w-full p-6 md:p-8 rounded-3xl shadow-2xl relative text-center border-2 border-rose-300" onclick="event.stopPropagation()">
+            <button onclick="closeEnvelopeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-2xl font-bold">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="w-12 h-12 bg-rose-100 text-romantic-500 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">
+                <i class="fa-solid fa-envelope-open-text"></i>
+            </div>
+            <h3 id="envModalTitle" class="text-xl font-bold text-slate-800 mb-3"></h3>
+            <p id="envModalBody" class="text-slate-600 text-sm leading-relaxed whitespace-pre-line bg-rose-50/80 p-4 rounded-2xl border border-rose-100"></p>
+            <button onclick="closeEnvelopeModal()" class="mt-6 bg-romantic-500 hover:bg-romantic-600 text-white font-bold py-2.5 px-6 rounded-full shadow-md text-xs">
+                Close
+            </button>
+        </div>
+    </div>
 
     <!-- Photo Lightbox Modal for Full View & Zoom -->
     <div id="imageModal" class="fixed inset-0 z-50 bg-black/90 hidden backdrop-blur-md flex items-center justify-center p-4 transition-opacity duration-300" onclick="closeImageModal()">
